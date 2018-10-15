@@ -1,45 +1,47 @@
 <!doctype html>
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weather</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'weather_app/style.css' %}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <script>
-        $(document).ready(function() {
-           $('form').submit(function(){
+        $(document).ready(function () {
+            $('form').submit(function () {
                 var apikey = 'ee6d2ccd5adb752de5afa4fe6411a4d6';
                 var city = $('input:text[name=city]').val();
-                $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + apikey, function(res){
+                $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=imperial&appid=' + apikey, function (res) {
                     var result = '';
-                    var string='';
+                    var string = '';
                     string += "<p>" + res['name'] + ": " + res['weather'][0]['description'] + "</p><br>";
                     string += "<p>" + "Temperature: " + res['main']['temp'] + " F</p>";
-                    $('#results').hide().html(string).fadeIn('slow');
+                    $('.results').hide().html(string).fadeIn('slow');
                 }, 'jsonp');
                 return false;
-           })
+            })
 
         });
     </script>
 </head>
+
 <body>
-    <div id="header"><h1 >Enter city name to retrieve weather data</h1></div>
-    <form class="form-group col-xs-3" >
+    <div class="header">
+        <h1>Enter city name to retrieve weather data</h1>
+    </div>
+    <form class="form-group col-4 ">
         <label for='city'></label>
-        <input type='text' class="form-control input-lg"  name='city' id='city' placeholder="City name here..."/>
-        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-        <input type='submit' class="btn btn-primary btn-lg" value='submit'/>
+        <input type='text' class="form-control input-md" name='city' id='city' placeholder="City name here..." />
+        <input type='submit' class="btn btn-primary btn-sm" value='submit' />
     </form>
-    <!-- <video autoplay muted loop id="myVideo">
-        <source src="../../../static/weather_app/clouds.mp4" type="video/mp4">
-    </video> -->
-    <div id="results"></div>
-    <p id="link">To view codes for this app on Github,<a href="https://github.com/YohanTe?tab=repositories" target="_blank">Click here</a></p>
-    
+    <div class="results"></div>
+    <p class="link">To view codes for this app on Github,
+        <a href="https://github.com/YohanTe?tab=repositories" target="_blank">Click here</a>
+    </p>
+
 </body>
+
 </html>
